@@ -48,6 +48,7 @@ struct JUnitReport
             case unknown
             case failed
             case systemOut
+            case skipped
         }
         var title: String
         var state: State
@@ -116,6 +117,8 @@ extension JUnitReport.TestResult: XMLRepresentable
             return "        <failure message='\(title.stringByEscapingXMLChars)'>\n        </failure>"
         case .systemOut:
             return "        <system-out>\(title.stringByEscapingXMLChars)</system-out>"
+        case .skipped:
+            return "        <skipped />"
         default:
             // falback to system-out. This is better than printing nothing
             return "        <system-out>\(title.stringByEscapingXMLChars)</system-out>"
@@ -147,6 +150,8 @@ extension JUnitReport.TestCase
             state = .failed
         case .success:
             state = .passed
+        case .skipped:
+            state = .skipped
         case .unknown:
             state = .unknown
         }

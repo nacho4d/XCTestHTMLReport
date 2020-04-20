@@ -1,0 +1,18 @@
+#! /usr/bin/env zsh
+
+RESULT_FILE=xcodeTestResults.xcresult
+
+# Remove any previous file
+rm -rf $RESULT_FILE
+
+# Test sample app to create xcresult file
+xcodebuild \
+-scheme XCTestHTMLReportSampleApp \
+-project XCTestHTMLReportSampleApp.xcodeproj \
+test \
+-destination "platform=iOS Simulator,name=iPhone 8,OS=latest" \
+-resultBundlePath "$RESULT_FILE" \
+-quiet
+
+# Check xcresult file was found
+[[ ! -d "$RESULT_FILE" ]] && echo xcresult file "$RESULT_FILE" was NOT found && exit 1
