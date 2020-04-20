@@ -176,6 +176,8 @@ extension JUnitReport.TestResult
             state = .failed
         } else if activity.type == .userCreated {
             state = .systemOut
+        } else if activity.type == .skippedTest {
+            state = .skipped
         } else {
             state = .unknown
         }
