@@ -1,10 +1,16 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "XCTestHTMLReport",
+    platforms: [
+        .macOS(.v10_13),
+//        .iOS(.v11),
+//        .tvOS(.v9),
+//        .watchOS(.v2)
+    ],
     products: [
         .executable(name: "xchtmlreport", targets: ["XCTestHTMLReport"])
     ],
@@ -20,6 +26,7 @@ let package = Package(
             dependencies: ["Rainbow", "XCResultKit"]),
         .testTarget(
             name: "XCTestHTMLReportTests",
-            dependencies: ["XCTestHTMLReport"]),
+            dependencies: ["XCTestHTMLReport"],
+            resources: [.copy("TestResults.xcresult")]),
     ]
 )
