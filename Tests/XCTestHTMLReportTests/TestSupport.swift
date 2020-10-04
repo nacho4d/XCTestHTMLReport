@@ -12,6 +12,13 @@ func XCTAssertContains(_ target: @autoclosure () throws -> String, _ substring: 
     XCTAssertTrue(try target().contains(substring()), file: file, line: line)
 }
 
+func urlFromXCHtmlreportStdout(_ stdOut: String) -> URL? {
+    let regex = try! NSRegularExpression(pattern: ".*successfully created at (.+)$", options: [])
+    guard let match = regex.firstMatch(in: stdOut, options: [], range: NSRange(location: 0, length: stdOut.count)) else { return nil }
+    let htmlPath = (stdOut as NSString).substring(with: match.range(at: 1))
+    return URL(fileURLWithPath: htmlPath)
+}
+
 extension Bundle {
     static let testBundle: Bundle = {
         // This is needed because `Bundle.module` will not work in tests.

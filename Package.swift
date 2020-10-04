@@ -6,27 +6,23 @@ import PackageDescription
 let package = Package(
     name: "XCTestHTMLReport",
     platforms: [
-        .macOS(.v10_13),
-//        .iOS(.v11),
-//        .tvOS(.v9),
-//        .watchOS(.v2)
+        .macOS(.v10_15),
     ],
     products: [
         .executable(name: "xchtmlreport", targets: ["XCTestHTMLReport"])
     ],
     dependencies: [
-         .package(url: "https://github.com/onevcat/Rainbow.git", from: "3.0.0"),
-         .package(url: "https://github.com/davidahouse/XCResultKit.git", from: "0.6.0")
+        .package(url: "https://github.com/onevcat/Rainbow.git", .upToNextMajor(from: "3.0.0")),
+        .package(url: "https://github.com/davidahouse/XCResultKit.git", .exact("0.7.1")),
+        .package(url: "https://github.com/nacho4d/NDHpple.git", .exact("2.0.1-alpha1")),
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "XCTestHTMLReport",
             dependencies: ["Rainbow", "XCResultKit"]),
         .testTarget(
             name: "XCTestHTMLReportTests",
-            dependencies: ["XCTestHTMLReport"],
+            dependencies: ["XCTestHTMLReport", "NDHpple"],
             resources: [.copy("TestResults.xcresult")]),
     ]
 )

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Rainbow
+//import Rainbow
 
 struct Logger
 {
@@ -15,23 +15,27 @@ struct Logger
 
     static func error(_ message: String)
     {
-        print("Error: ".red.bold + message)
+        //print("Error: ".red.bold + message)
+        print("Error: " + message)
     }
 
     static func success(_ message: String)
     {
-        print(message.green.bold)
+        //print(message.green.bold)
+        print(message)
     }
 
     static func warning(_ message: String)
     {
-        print("Warning: ".yellow.bold + message)
+        //print("Warning: ".yellow.bold + message)
+        print("Warning: " + message)
     }
 
     static func step(_ message: String)
     {
         if verbose {
-            print("\n" + message.bold)
+            //print("\n" + message.bold)
+            print("\n" + message)
         }
     }
 
